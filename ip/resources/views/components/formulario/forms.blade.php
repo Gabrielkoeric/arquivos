@@ -1,0 +1,30 @@
+<form action="{{$action}}" method="post">
+    @csrf
+    @isset($nome)
+        @method('PUT')
+    @endisset
+
+    <div class="mb-3">
+        <label for="nome" class=form-label>Nome:</label>
+        <input type="text" id="nome" name="nome" class="form-control" @isset($nome) value="{{$nome}}" @endisset>
+
+        <label for="email" class=form-label>E-mail</label>
+        <input type="email" id="email" name="email" class="form-control" @isset($email) value="{{$email}}" @endisset
+        @isset($email) readonly @endisset>
+
+        <label for="celular" class=form-label>Celular</label>
+        <input type="tel" id="celular" name="celular" class="form-control" @isset($celular) value="{{$celular}}" @endisset>
+
+        <label for="permissao" class=form-label>Permissão</label>
+        <input type="text" id="permissao" name="permissao" class="form-control" @isset($permissao) value="{{$permissao}}" @endisset>
+    </div>
+    <button type="submit" class="btn btn-primary">Salvar</button>
+    <a href="{{route('usuario.index')}}" class="btn btn-danger">Cancelar</a>
+    @isset($nome)
+        <form action="{{route('usuario.destroy', $nome)}}" method="post" class="ms-2">
+            @csrf
+            @method('DELETE')
+            <button class="btn btn-danger">Excluir</button>
+        </form>
+    @endisset
+</form>
